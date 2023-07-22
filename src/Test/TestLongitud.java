@@ -13,6 +13,5 @@ public class TestLongitud {
 
         // Mostrar resultado
         System.out.println(monto + " " + unidadBase + " = " + String.format("%.2f", resultado) + " " + unidadCambio);
-
     }
 }
