@@ -74,4 +74,9 @@ public class ConversorLongitud extends Unidad {
                 throw new IllegalArgumentException("Unidad de longitud a cambiar no válida");
         }
     }
+
+    @Override
+    public String codigoISO(String unidad) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

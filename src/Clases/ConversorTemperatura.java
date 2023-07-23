@@ -34,4 +34,9 @@ public class ConversorTemperatura extends Unidad {
                 throw new IllegalArgumentException("Unidad de temperatura a cambiar no válida");
         }
     }
+
+    @Override
+    public String codigoISO(String unidad) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

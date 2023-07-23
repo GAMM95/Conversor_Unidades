@@ -7,6 +7,9 @@ public class ConversorDivisas extends Unidad {
     private static final double TASA_LIBRAS = 0.21712144;
     private static final double TASA_YEN = 39.577486;
 
+    public ConversorDivisas() {
+    }
+
     public ConversorDivisas(double valor, String unidadBase, String unidadCambio) {
         super(valor, unidadBase, unidadCambio);
     }
@@ -14,39 +17,60 @@ public class ConversorDivisas extends Unidad {
     @Override
     public double convertir(double valor, String unidadInicial, String unidadCambio) {
         double dato = 0; // dato inicial en soles
-        switch (unidadInicial.toLowerCase()) {
-            case "sol":
+        switch (unidadInicial) {
+            case "PEN - Sol peruano":
                 dato = valor;
                 break;
-            case "dolar":
+            case "USD - Dólar estadounidense":
                 dato = valor / TASA_DOLAR;
                 break;
-            case "euro":
+            case "EUR - Euro":
                 dato = valor / TASA_EURO;
                 break;
-            case "libras":
+            case "GPB - Libra Esterlina":
                 dato = valor / TASA_LIBRAS;
                 break;
-            case "yen":
+            case "JPY - Yen Japonés":
                 dato = valor / TASA_YEN;
                 break;
             default:
                 throw new IllegalArgumentException("Moneda base no válida");
 
         }
-        switch (unidadCambio.toLowerCase()) {
-            case "sol":
+        switch (unidadCambio) {
+            case "PEN - Sol peruano":
                 return dato;
-            case "dolar":
+            case "USD - Dólar estadounidense":
                 return dato * TASA_DOLAR;
-            case "euro":
+            case "EUR - Euro":
                 return dato * TASA_EURO;
-            case "libras":
+            case "GPB - Libra Esterlina":
                 return dato * TASA_LIBRAS;
-            case "yen":
+            case "JPY - Yen Japonés":
                 return dato * TASA_YEN;
             default:
                 throw new IllegalArgumentException("Moneda de cambio no válida");
         }
     }
+
+    @Override
+    public String codigoISO(String unidad) {
+        switch (unidad) {
+            case "PEN - Sol peruano":
+                return "PEN";
+            case "USD - Dólar estadounidense":
+                return "USD";
+            case "EUR - Euro":
+                return "EUR";
+            case "COP - Peso colombiano":
+                return "COP";
+            case "JPY - Yen Japonés":
+                return "JPY";
+            case "GPB - Libra Esterlina":
+                return "GBP";
+            default:
+                return null;
+        }
+    }
+
 }

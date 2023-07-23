@@ -48,4 +48,9 @@ public class ConversorPeso extends Unidad {
                 throw new IllegalArgumentException("Unidad de peso a cambiar no válida");
         }
     }
+
+    @Override
+    public String codigoISO(String unidad) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

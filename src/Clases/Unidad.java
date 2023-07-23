@@ -6,6 +6,9 @@ public abstract class Unidad implements Conversor {
     protected String unidadBase;
     protected String unidadCambio;
 
+    public Unidad() {
+    }
+
     public Unidad(double valor, String unidadBase, String unidadCambio) {
         this.valor = valor;
         this.unidadBase = unidadBase;
