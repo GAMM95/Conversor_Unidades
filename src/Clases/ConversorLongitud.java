@@ -9,66 +9,66 @@ public class ConversorLongitud extends Unidad {
     @Override
     public double convertir(double valor, String unidadInicial, String unidadCambio) {
         double dato = 0;
-        switch (unidadInicial.toLowerCase()) {
-            case "metro":
+        switch (unidadInicial) {
+            case "m - Metro":
                 dato = valor;
                 break;
-            case "milimetro":
+            case "mm - Milímetro":
                 dato = valor / 1000;
                 break;
-            case "centimetro":
+            case "cm - Centímetro":
                 dato = valor / 100;
                 break;
-            case "decimetro":
+            case "dm - Decímetro":
                 dato = valor / 10;
                 break;
-            case "decametro":
+            case "dam - Decámetro":
                 dato = valor * 10;
                 break;
-            case "hectometro":
+            case "hm - Hectómetro":
                 dato = valor * 100;
                 break;
-            case "kilometro":
+            case "km - Kilómetro":
                 dato = valor * 1000;
                 break;
-            case "pulgada":
+            case "in - Pulgada":
                 dato = valor / 39.3700787402;
                 break;
-            case "pie":
+            case "ft - Pie":
                 dato = valor / 3.28083989501;
                 break;
-            case "yarda":
+            case "yd - Yarda":
                 dato = valor / 1.09361329834;
                 break;
-            case "milla":
+            case "mi - Milla":
                 dato = valor / 0.00062137;
                 break;
             default:
                 throw new IllegalArgumentException("Unidad de longitud inicial no válida");
 
         }
-        switch (unidadCambio.toLowerCase()) {
-            case "metro":
+        switch (unidadCambio) {
+            case "m - Metro":
                 return dato;
-            case "milimetro":
+            case "mm - Milímetro":
                 return dato * 1000;
-            case "centimetro":
+            case "cm - Centímetro":
                 return dato * 100;
-            case "decimetro":
+            case "dm - Decímetro":
                 return dato * 10;
-            case "decametro":
+            case "dam - Decámetro":
                 return dato / 10;
-            case "hectometro":
+            case "hm - Hectómetro":
                 return dato / 100;
-            case "kilometro":
+            case "km - Kilómetro":
                 return dato / 1000;
-            case "pulgada":
+            case "in - Pulgada":
                 return dato * 39.3700787402;
-            case "pie":
+            case "ft - Pie":
                 return dato * 3.28083989501;
-            case "yarda":
+            case "yd - Yarda":
                 return dato * 1.09361329834;
-            case "milla":
+            case "mi - Milla":
                 return dato * 0.00062137;
             default:
                 throw new IllegalArgumentException("Unidad de longitud a cambiar no válida");
@@ -77,6 +77,19 @@ public class ConversorLongitud extends Unidad {
 
     @Override
     public String codigoISO(String unidad) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return switch (unidad) {
+            case "m - Metro" -> "m";
+            case "mm - Milímetro" -> "mm";
+            case "cm - Centímetro" -> "cm";
+            case "dm - Decímetro" -> "dm";
+            case "dam - Decámetro" -> "dam";
+            case "hm - Hectómetro" -> "hm";
+            case "km - Kilómetro" -> "km";
+            case "in - Pulgada" -> "in";
+            case "ft - Pie" -> "ft";
+            case "yd - Yarda" -> "yd";
+            case "mi - Milla" -> "mi";
+            default -> null;
+        };
     }
 }

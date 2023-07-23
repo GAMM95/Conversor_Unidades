@@ -18,38 +18,31 @@ public class ConversorDivisas extends Unidad {
     public double convertir(double valor, String unidadInicial, String unidadCambio) {
         double dato = 0; // dato inicial en soles
         switch (unidadInicial) {
-            case "PEN - Sol peruano":
-                dato = valor;
-                break;
-            case "USD - Dólar estadounidense":
-                dato = valor / TASA_DOLAR;
-                break;
-            case "EUR - Euro":
-                dato = valor / TASA_EURO;
-                break;
-            case "GPB - Libra Esterlina":
-                dato = valor / TASA_LIBRAS;
-                break;
-            case "JPY - Yen Japonés":
-                dato = valor / TASA_YEN;
-                break;
-            default:
-                throw new IllegalArgumentException("Moneda base no válida");
+            case "PEN - Sol peruano" -> dato = valor;
+            case "USD - Dólar estadounidense" -> dato = valor / TASA_DOLAR;
+            case "EUR - Euro" -> dato = valor / TASA_EURO;
+            case "GPB - Libra Esterlina" -> dato = valor / TASA_LIBRAS;
+            case "JPY - Yen Japonés" -> dato = valor / TASA_YEN;
+            default -> throw new IllegalArgumentException("Moneda base no válida");
 
         }
         switch (unidadCambio) {
-            case "PEN - Sol peruano":
+            case "PEN - Sol peruano" -> {
                 return dato;
-            case "USD - Dólar estadounidense":
+            }
+            case "USD - Dólar estadounidense" -> {
                 return dato * TASA_DOLAR;
-            case "EUR - Euro":
+            }
+            case "EUR - Euro" -> {
                 return dato * TASA_EURO;
-            case "GPB - Libra Esterlina":
+            }
+            case "GPB - Libra Esterlina" -> {
                 return dato * TASA_LIBRAS;
-            case "JPY - Yen Japonés":
+            }
+            case "JPY - Yen Japonés" -> {
                 return dato * TASA_YEN;
-            default:
-                throw new IllegalArgumentException("Moneda de cambio no válida");
+            }
+            default -> throw new IllegalArgumentException("Moneda de cambio no válida");
         }
     }
 

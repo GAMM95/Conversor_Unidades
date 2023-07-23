@@ -15,7 +15,7 @@ public class ControllerDivisas implements ActionListener {
     private FrmConvertor frmConvertor;
 
     // Arrays de divisas
-    private String[] divisas = {"seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "GPB - Libra Esterlina", "JPY - Yen Japonés"};  //  Array de categorias de cargos
+    private String[] divisas = {"seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "GPB - Libra Esterlina", "JPY - Yen Japonés"};
 
     public ControllerDivisas(ConversorDivisas cd, FrmConvertor frmConvertor) {
         this.cd = cd;
@@ -46,15 +46,17 @@ public class ControllerDivisas implements ActionListener {
     // Metodo para realizar la conversion de la divisa
     private void convertirDivisa() {
         try {
-            if (frmConvertor.txtDivisaBase.getText().isEmpty() || frmConvertor.cboDivisaCambio.equals("seleccionar")) {
-                frmConvertor.txtResultado.setText("Seleccione una moneda");
+            if (frmConvertor.txtDivisaBase.getText().isEmpty()) {
+                frmConvertor.txtResultado.setText("Ingrese valor a convertir");
+            } else if (frmConvertor.cboDivisaCambio.equals("seleccionar")) {
+                frmConvertor.txtResultado.setText("Seleccione una moneda de cambio");
             } else {
                 double moneda = Double.parseDouble(frmConvertor.txtDivisaBase.getText());
                 String monedaBase = frmConvertor.cboDivisaBase.getSelectedItem().toString();
                 String monedaCambio = frmConvertor.cboDivisaCambio.getSelectedItem().toString();
                 Conversor cd = new ConversorDivisas(moneda, monedaBase, monedaCambio);
                 double resultado = cd.convertir(moneda, monedaBase, monedaCambio);
-                frmConvertor.txtDivisaCambio.setText(String.valueOf(String.format("%.2f", resultado)));
+                frmConvertor.txtDivisaCambio.setText(String.valueOf(String.format("%.4f", resultado)));
 
                 // Mostrar resultado con codigos ISO de cada moneda
                 String monBase = cd.codigoISO(frmConvertor.cboDivisaBase.getSelectedItem().toString());
@@ -90,7 +92,7 @@ public class ControllerDivisas implements ActionListener {
         frmConvertor.txtDivisaCambio.setText("");
         frmConvertor.txtResultado.setText("");
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(frmConvertor.cboDivisaBase)) {
@@ -110,7 +112,7 @@ public class ControllerDivisas implements ActionListener {
         if (e.getSource().equals(frmConvertor.btnLimpiarDivisas)) {
             limpiarInputs();
         }
-        
+
     }
-    
+
 }
