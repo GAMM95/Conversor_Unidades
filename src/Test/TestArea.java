@@ -1,6 +1,6 @@
 package Test;
 
-import Clases.ConversorArea;
+import Clases.ConversorSuperficie;
 
 public class TestArea {
     public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class TestArea {
         String unidadBase = "metro cuadrado";
         String unidadCambio = "pie cuadrado";
 
-        ConversorArea cd = new ConversorArea(monto, unidadBase, unidadCambio);
+        ConversorSuperficie cd = new ConversorSuperficie(monto, unidadBase, unidadCambio);
         double resultado = cd.convertir(monto, unidadBase, unidadCambio);
 
         // Mostrar resultado

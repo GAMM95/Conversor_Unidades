@@ -2,6 +2,9 @@ package Clases;
 
 public class ConversorLongitud extends Unidad {
 
+    public ConversorLongitud() {
+    }
+
     public ConversorLongitud(double valor, String unidadBase, String unidadCambio) {
         super(valor, unidadBase, unidadCambio);
     }
@@ -78,18 +81,26 @@ public class ConversorLongitud extends Unidad {
     @Override
     public String codigoISO(String unidad) {
         return switch (unidad) {
-            case "m - Metro" -> "m";
-            case "mm - Milímetro" -> "mm";
-            case "cm - Centímetro" -> "cm";
-            case "dm - Decímetro" -> "dm";
-            case "dam - Decámetro" -> "dam";
-            case "hm - Hectómetro" -> "hm";
-            case "km - Kilómetro" -> "km";
-            case "in - Pulgada" -> "in";
+            case "m - Metro" ->
+                "m";
+            case "mm - Milímetro" ->
+                "mm";
+            case "cm - Centímetro" ->
+                "cm";
+            case "dm - Decímetro" ->
+                "dm";
+            case "dam - Decámetro" ->
+                "dam";
+            case "hm - Hectómetro" ->
+                "hm";
+            case "km - Kilómetro" ->
+                "km";
+            case "in - Pulgada" ->
+                "in";
             case "ft - Pie" -> "ft";
             case "yd - Yarda" -> "yd";
             case "mi - Milla" -> "mi";
-            default -> null;
+            default ->  null;
         };
     }
 }

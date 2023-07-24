@@ -1,17 +1,12 @@
 package Vista;
 
-import Clases.ConversorDivisas;
-import Controlador.ControllerDivisas;
 import Controlador.ControllerFrm;
 
 public class FrmConvertor extends javax.swing.JFrame {
 
-    ConversorDivisas cd = new ConversorDivisas();
-
     public FrmConvertor() {
         initComponents();
         ControllerFrm control = new ControllerFrm(this);
-        ControllerDivisas divisas = new ControllerDivisas(cd, this);
     }
 
     @SuppressWarnings("unchecked")
@@ -151,7 +146,7 @@ public class FrmConvertor extends javax.swing.JFrame {
 
         panelShadow1.setShadowType(gamm_PanelShadow.PanelShadow.ShadowType.CENTER);
 
-        cboDivisaBase.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "GPB - Libra Esterlina", "JPY - Yen Japonés" }));
+        cboDivisaBase.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleccionar", "item 1", "item 2", "item 3", "item 4" }));
         cboDivisaBase.setAutoscrolls(true);
         cboDivisaBase.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cboDivisaBase.setLabeText("");
@@ -189,7 +184,7 @@ public class FrmConvertor extends javax.swing.JFrame {
 
         panelShadow2.setShadowType(gamm_PanelShadow.PanelShadow.ShadowType.CENTER);
 
-        cboDivisaCambio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "GPB - Libra Esterlina", "JPY - Yen Japonés" }));
+        cboDivisaCambio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleccionar", "item 1", "item 2", "item 3", "item 4" }));
         cboDivisaCambio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cboDivisaCambio.setLabeText("");
 
@@ -365,7 +360,7 @@ public class FrmConvertor extends javax.swing.JFrame {
 
         panelShadow5.setShadowType(gamm_PanelShadow.PanelShadow.ShadowType.CENTER);
 
-        cboTemperaturaBase.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "GPB - Libra Esterlina", "JPY - Yen Japonés" }));
+        cboTemperaturaBase.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleccionar", "item 1", "item 2", "item 3", "item 4" }));
         cboTemperaturaBase.setAutoscrolls(true);
         cboTemperaturaBase.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cboTemperaturaBase.setLabeText("");
@@ -403,7 +398,7 @@ public class FrmConvertor extends javax.swing.JFrame {
 
         panelShadow6.setShadowType(gamm_PanelShadow.PanelShadow.ShadowType.CENTER);
 
-        cboTemperaturaCambio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "GPB - Libra Esterlina", "JPY - Yen Japonés" }));
+        cboTemperaturaCambio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleccionar", "item 1", "item 2", "item 3", "item 4" }));
         cboTemperaturaCambio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         cboTemperaturaCambio.setLabeText("");
 
@@ -1209,7 +1204,7 @@ public class FrmConvertor extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        pnlConversor.addTab("Area", jPanel6);
+        pnlConversor.addTab("Superficie", jPanel6);
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -1423,7 +1418,7 @@ public class FrmConvertor extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        pnlConversor.addTab("Volumen", jPanel7);
+        pnlConversor.addTab("Volúmen", jPanel7);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

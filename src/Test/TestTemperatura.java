@@ -6,8 +6,8 @@ import Clases.ConversorTemperatura;
 public class TestTemperatura {
     public static void main(String[] args) {
         double dato = 10.5;
-        String unidadBase = "fahrenheit";
-        String unidadCambio = "kelvin";
+        String unidadBase = "°F - Fahrenheit";
+        String unidadCambio = "K - Kelvin";
 
         Conversor conversor = new ConversorTemperatura(dato, unidadBase, unidadCambio);
         double resultado = conversor.convertir(dato, unidadBase, unidadCambio);

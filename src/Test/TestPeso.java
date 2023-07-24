@@ -6,8 +6,8 @@ import Clases.ConversorPeso;
 public class TestPeso {
     public static void main(String[] args) {
         double dato = 1;
-        String unidadBase = "onza";
-        String unidadCambio = "gramo";
+        String unidadBase = "g - Gramo";
+        String unidadCambio = "oz - Onza";
 
         Conversor conversor = new ConversorPeso(dato, unidadBase, unidadCambio);
         double resultado = conversor.convertir(dato, unidadBase, unidadCambio);

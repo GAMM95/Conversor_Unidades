@@ -1,6 +1,10 @@
 package Clases;
 
 public class ConversorPeso extends Unidad {
+
+    public ConversorPeso() {
+    }
+
     public ConversorPeso(double valor, String unidadBase, String unidadCambio) {
         super(valor, unidadBase, unidadCambio);
     }
@@ -8,41 +12,41 @@ public class ConversorPeso extends Unidad {
     @Override
     public double convertir(double valor, String unidadInicial, String unidadCambio) {
         double dato = 0;
-        switch (unidadInicial.toLowerCase()) {
-            case "gramo":
+        switch (unidadInicial) {
+            case "g - Gramo":
                 dato = valor;
                 break;
-            case "quilate":
+            case "kt - Quilate":
                 dato = valor / 5;
                 break;
-            case "kilogramo":
+            case "kg - Kilogramo":
                 dato = valor / 0.001;
                 break;
-            case "tonelada":
+            case "Tn - Tonelada":
                 dato = valor / 0.000001;
                 break;
-            case "onza":
+            case "oz - Onza":
                 dato = valor / 0.035273965838;
                 break;
-            case "libra":
+            case "lb - Libra":
                 dato = valor / 0.002204622476;
                 break;
             default:
                 throw new IllegalArgumentException("Unidad de peso inicial no válida");
 
         }
-        switch (unidadCambio.toLowerCase()) {
-            case "gramo":
+        switch (unidadCambio) {
+            case "g - Gramo":
                 return dato;
-            case "quilate":
+            case "kt - Quilate":
                 return dato * 5;
-            case "kilogramo":
+            case "kg - Kilogramo":
                 return dato * 0.001;
-            case "tonelada":
+            case "Tn - Tonelada":
                 return dato * 0.000001;
-            case "onza":
+            case "oz - Onza":
                 return dato * 0.035273965838;
-            case "libra":
+            case "lb - Libra":
                 return dato * 0.002204622476;
             default:
                 throw new IllegalArgumentException("Unidad de peso a cambiar no válida");
@@ -51,6 +55,21 @@ public class ConversorPeso extends Unidad {
 
     @Override
     public String codigoISO(String unidad) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return switch (unidad) {
+            case "g - Gramo" ->
+                "g";
+            case "kt - Quilate" ->
+                "kt";
+            case "kg - Kilogramo" ->
+                "kg";
+            case "Tn - Tonelada" ->
+                "Tn";
+            case "oz - Onza" ->
+                "oz";
+            case "lb - Libra" ->
+                "lb";
+            default ->
+                null;
+        };
     }
 }
