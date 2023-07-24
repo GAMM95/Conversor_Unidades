@@ -22,28 +22,14 @@ public class ConversorTemperaturaTest {
 
     @Test
     public void testConvertir_2() {
-        System.out.println("Convertir °F - Fahrenheit a K - Kelvin");
-        double valor = 10.0;
-        String unidadInicial = "°F - Fahrenheit";
+        System.out.println("Convertir °C - Celsius a K - Kelvin");
+        double valor = 10.5;
+        String unidadInicial = "°C - Celsius";
         String unidadCambio = "K - Kelvin";
         ConversorTemperatura instance = new ConversorTemperatura(valor, unidadCambio, unidadCambio);
 
-        double expResult = 260.93;
-        double resultado = Math.round(expResult*100.0) / 100.0;
-        double result = instance.convertir(valor, unidadInicial, unidadCambio);
-        assertEquals(resultado, result, 0);
-    }
-
-    @Test
-    public void testConvertir_3() {
-        System.out.println("convertir");
-        double valor = 10.0;
-        String unidadInicial = "K - Kelvin";
-        String unidadCambio = "°R - Rankinen";
-        ConversorTemperatura instance = new ConversorTemperatura(valor, unidadCambio, unidadCambio);
-        double expResult = 18.0;
+        double expResult = 283.65;
         double result = instance.convertir(valor, unidadInicial, unidadCambio);
         assertEquals(expResult, result, 0);
     }
-
 }

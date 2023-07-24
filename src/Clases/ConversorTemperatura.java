@@ -14,7 +14,7 @@ public class ConversorTemperatura extends Unidad {
         double dato = 0;
         switch (unidadInicial) {
             case "°C - Celsius" -> dato = valor;
-            case "°F - Fahrenheit" -> dato = Math.round((valor - 32) * 5 / 9 * 100.0)/100.0;
+            case "°F - Fahrenheit" -> dato = (valor - 32) * 5 / 9;
             case "K - Kelvin" -> dato = valor - 273.15;
             case "°R - Rankine" -> dato = (valor - 491.67) * 5 / 9;
             default -> throw new IllegalArgumentException("Unidad de temperatura inicial no válida");
