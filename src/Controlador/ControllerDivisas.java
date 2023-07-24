@@ -5,7 +5,11 @@ import Clases.ConversorDivisas;
 import Vista.FrmConvertor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Scanner;
 import javax.swing.DefaultComboBoxModel;
+import org.json.JSONObject;
 
 public class ControllerDivisas implements ActionListener {
 
@@ -45,29 +49,28 @@ public class ControllerDivisas implements ActionListener {
     // Metodo para realizar la conversion de la divisa
     private void convertirDivisa() {
         try {
-            if (frmConvertor.txtDivisaBase.getText().isEmpty()) {
-                frmConvertor.txtResultado.setText("Ingrese valor a convertir");
-            } else if (frmConvertor.cboDivisaCambio.equals("seleccionar")) {
-                frmConvertor.txtResultado.setText("Seleccione una moneda de cambio");
-            } else {
-                double moneda = Double.parseDouble(frmConvertor.txtDivisaBase.getText());
-                String monedaBase = frmConvertor.cboDivisaBase.getSelectedItem().toString();
-                String monedaCambio = frmConvertor.cboDivisaCambio.getSelectedItem().toString();
-                Conversor cd = new ConversorDivisas(moneda, monedaBase, monedaCambio);
-                double resultado = cd.convertir(moneda, monedaBase, monedaCambio);
-                frmConvertor.txtDivisaCambio.setText(String.valueOf(String.format("%.4f", resultado)));
+            double moneda = Double.parseDouble(frmConvertor.txtDivisaBase.getText());
+            String monedaBase = cd.codigoISO(frmConvertor.cboDivisaBase.getSelectedItem().toString());
+            String monedaCambio = cd.codigoISO(frmConvertor.cboDivisaCambio.getSelectedItem().toString());
 
-                // Mostrar resultado con codigos ISO de cada moneda
-                String monBase = cd.codigoISO(frmConvertor.cboDivisaBase.getSelectedItem().toString());
-                String monCambio = cd.codigoISO(frmConvertor.cboDivisaCambio.getSelectedItem().toString());
-                frmConvertor.txtResultado.setText(moneda + " " + monBase + " = " + String.format("%.2f", resultado) + " " + monCambio);
-            }
-        } catch (NumberFormatException e) {
-            // Manejar la excepción si no se puede convertir el valor a double
-            System.out.println("Error en el formato del valor ingresado.");
-        } catch (IllegalArgumentException e) {
-            // Manejar la excepción si se ingresó una unidad no válida
-            System.out.println("Error");
+            //  dirección web de la API de Open Exchange Rates que proporciona los datos de tasa de cambio en formato JSON
+            URL url = new URL("https://openexchangerates.org/api/latest.json?app_id=f9f7038adb5642d89ea7123623b822ac");
+            
+            // openStream(): abrir una conexión a la URL 
+            // Scanner:leer los datos de esa conexión.
+            Scanner urlScanner = new Scanner(url.openStream());
+            String json = urlScanner.useDelimiter("\\Z").next();
+            urlScanner.close();
+            //  Acceso a los valores dek JSON
+            JSONObject obj = new JSONObject(json);
+            double tasaOrigen = obj.getJSONObject("rates").getDouble(monedaBase);
+            double tasaDestino = obj.getJSONObject("rates").getDouble(monedaCambio);
+            // Calculo de la conversion
+            double resultado = moneda * tasaDestino / tasaOrigen;
+            frmConvertor.txtDivisaCambio.setText(String.valueOf(String.format("%.4f", resultado)));
+            frmConvertor.txtResultado.setText(moneda + " " + monedaBase + " = " + String.format("%.2f", resultado) + " " + monedaCambio);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
