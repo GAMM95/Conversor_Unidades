@@ -18,7 +18,7 @@ public class ControllerDivisas implements ActionListener {
     private FrmConvertor frmConvertor;
 
     // Arrays de monedas
-    private String[] divisas = {"seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "GPB - Libra Esterlina", "JPY - Yen Japonés"};
+    private String[] divisas = {"seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "BRL - Real brasilero", "ARS - Peso argentino", "CLP - Peso chileno", "COP - Peso colombiano", "BOB - Bolíviano", "PYG - Guaraní paraguayo", "UYU - Peso uruguayo", "VND - Bolívar venezolano", "MXN - Peso mexicano", "JPY - Yen japonés", "GBP - Libra esterlina", "KRW - Won surcoreano"};
 
     public ControllerDivisas(ConversorDivisas cd, FrmConvertor frmConvertor) {
         this.cd = cd;
@@ -55,7 +55,7 @@ public class ControllerDivisas implements ActionListener {
 
             //  dirección web de la API de Open Exchange Rates que proporciona los datos de tasa de cambio en formato JSON
             URL url = new URL("https://openexchangerates.org/api/latest.json?app_id=f9f7038adb5642d89ea7123623b822ac");
-            
+
             // openStream(): abrir una conexión a la URL 
             // Scanner:leer los datos de esa conexión.
             Scanner urlScanner = new Scanner(url.openStream());

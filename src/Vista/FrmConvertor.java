@@ -1451,7 +1451,7 @@ public class FrmConvertor extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Elaborado por Jhonatan Mantilla");
+        jLabel4.setText("© Hecho por Jhonatan Mantilla");
 
         javax.swing.GroupLayout pnlRedesSocialesLayout = new javax.swing.GroupLayout(pnlRedesSociales);
         pnlRedesSociales.setLayout(pnlRedesSocialesLayout);
