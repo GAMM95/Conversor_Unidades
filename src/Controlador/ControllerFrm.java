@@ -7,8 +7,11 @@ import Clases.ConversorSuperficie;
 import Clases.ConversorTemperatura;
 import Clases.ConversorVolumen;
 import Vista.FrmConvertor;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 
 public class ControllerFrm implements ActionListener {
 
@@ -29,8 +32,19 @@ public class ControllerFrm implements ActionListener {
         this.frmConvertor.setResizable(false);
         interfaces();
         importarControllers();
+        // cargar el icono desde el archivo
+        ImageIcon icono = new ImageIcon("Imagenes/Iconos/icono.png");
+        //Establecer el icono de la ventana
+        this.frmConvertor.setIconImage(getIconImage());
     }
 
+    // Establecer icono de programa
+    public Image getIconImage() {
+        Image icono;
+        icono = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Iconos/icono.png"));  //obtener el objeto de imagen 
+        return icono;
+    }
+    
     // Metodo para importar controladores
     private void importarControllers() {
         ControllerDivisas divisas = new ControllerDivisas(cd, this.frmConvertor);
