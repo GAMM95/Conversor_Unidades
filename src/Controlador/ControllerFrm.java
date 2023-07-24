@@ -17,7 +17,7 @@ public class ControllerFrm implements ActionListener {
 
     // Instancias de clases
     Url u = new Url();
-    private FrmConvertor frmConvertor;
+    private final FrmConvertor frmConvertor;
 
     ConversorDivisas cd = new ConversorDivisas();
     ConversorTemperatura ct = new ConversorTemperatura();
@@ -32,8 +32,6 @@ public class ControllerFrm implements ActionListener {
         this.frmConvertor.setResizable(false);
         interfaces();
         importarControllers();
-        // cargar el icono desde el archivo
-        ImageIcon icono = new ImageIcon("Imagenes/Iconos/icono.png");
         //Establecer el icono de la ventana
         this.frmConvertor.setIconImage(getIconImage());
     }

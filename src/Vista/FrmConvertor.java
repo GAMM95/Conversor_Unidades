@@ -1123,7 +1123,7 @@ public class FrmConvertor extends javax.swing.JFrame {
         panelShadow20.setShadowType(null);
 
         jLabel33.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel33.setText("Convertidor de área");
+        jLabel33.setText("Convertidor de superficie");
 
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Iconos/icon_area.png"))); // NOI18N
