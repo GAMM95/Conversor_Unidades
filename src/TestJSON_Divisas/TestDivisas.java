@@ -1,4 +1,4 @@
-package Test;
+package TestJSON_Divisas;
 
 import Clases.Conversor;
 import Clases.ConversorDivisas;
