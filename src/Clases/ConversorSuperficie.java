@@ -13,41 +13,18 @@ public class ConversorSuperficie extends Unidad {
     public double convertir(double valor, String unidadInicial, String unidadCambio) {
 double dato = 0;
         switch (unidadInicial) {
-            case "m² - Metro cuadrado":
-                dato = valor;
-                break;
-            case "mm² - Milímetro cuadrado":
-                dato = valor / 1000000;
-                break;
-            case "cm² - Centímetro cuadrado":
-                dato = valor / 10000;
-                break;
-            case "dm² - Decímetro cuadrado":
-                dato = valor / 100;
-                break;
-            case "ha - Hectárea":
-                dato = valor / 0.0001;
-                break;
-            case "km² - Kilómetro cuadrado":
-                dato = valor / 0.000001;
-                break;
-            case "in²- Pulgada cuadrada":
-                dato = valor / 1549.90700558;
-                break;
-            case "ft² - Pie cuadrado":
-                dato = valor / 10.7639104167;
-                break;
-            case "yd² - Yarda cuadrada":
-                dato = valor / 1.1959900463;
-                break;
-            case "pc - Perca":
-                dato = valor / 0.198838781516;
-                break;
-            case "ac - Acre":
-                dato = valor / 0.000247105381;
-                break;
-            default:
-                throw new IllegalArgumentException("Unidad de volumen inicial no válida");
+            case "m² - Metro cuadrado" -> dato = valor;
+            case "mm² - Milímetro cuadrado" -> dato = valor / 1000000;
+            case "cm² - Centímetro cuadrado" -> dato = valor / 10000;
+            case "dm² - Decímetro cuadrado" -> dato = valor / 100;
+            case "ha - Hectárea" -> dato = valor / 0.0001;
+            case "km² - Kilómetro cuadrado" -> dato = valor / 0.000001;
+            case "in²- Pulgada cuadrada" -> dato = valor / 1549.90700558;
+            case "ft² - Pie cuadrado" -> dato = valor / 10.7639104167;
+            case "yd² - Yarda cuadrada" -> dato = valor / 1.1959900463;
+            case "pc - Perca" -> dato = valor / 0.198838781516;
+            case "ac - Acre" -> dato = valor / 0.000247105381;
+            default -> throw new IllegalArgumentException("Unidad de volumen inicial no válida");
         }
         switch (unidadCambio) {
             case "m² - Metro cuadrado" -> {return dato;}
@@ -82,5 +59,4 @@ double dato = 0;
             default -> null;
         };
     }
-
 }

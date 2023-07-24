@@ -13,35 +13,16 @@ public class ConversorVolumen extends Unidad {
     public double convertir(double valor, String unidadInicial, String unidadCambio) {
         double dato = 0;
         switch (unidadInicial) {
-            case "l - Litro":
-                dato = valor;
-                break;
-            case "ml - Mililitro":
-                dato = valor / 1000;
-                break;
-            case "cm³ - Centímetro cúbico":
-                dato = valor / 1000;
-                break;
-            case "m³ - Metro cúbico":
-                dato = valor / 0.001;
-                break;
-            case "ft³ - Pie cúbico":
-                dato = valor / 0.035314662471;
-                break;
-            case "yd³ - Yarda cúbica":
-                dato = valor / 0.001307950547;
-                break;
-            case "oz- Onza":
-                dato = valor / 33.8140222016;
-                break;
-            case "gal - Galón":
-                dato = valor / 0.264172037284;
-                break;
-            case "B - Barril":
-                dato = valor / 0.006289810965;
-                break;
-            default:
-                throw new IllegalArgumentException("Unidad de volumen inicial no válida");
+            case "l - Litro" -> dato = valor;
+            case "ml - Mililitro" -> dato = valor / 1000;
+            case "cm³ - Centímetro cúbico" -> dato = valor / 1000;
+            case "m³ - Metro cúbico" -> dato = valor / 0.001;
+            case "ft³ - Pie cúbico" -> dato = valor / 0.035314662471;
+            case "yd³ - Yarda cúbica" -> dato = valor / 0.001307950547;
+            case "oz- Onza" -> dato = valor / 33.8140222016;
+            case "gal - Galón" -> dato = valor / 0.264172037284;
+            case "B - Barril" -> dato = valor / 0.006289810965;
+            default -> throw new IllegalArgumentException("Unidad de volumen inicial no válida");
         }
         switch (unidadCambio) {
             case "l - Litro" -> {return dato;}

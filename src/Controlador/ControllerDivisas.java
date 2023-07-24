@@ -5,7 +5,6 @@ import Clases.ConversorDivisas;
 import Vista.FrmConvertor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
 public class ControllerDivisas implements ActionListener {
@@ -14,7 +13,7 @@ public class ControllerDivisas implements ActionListener {
     private ConversorDivisas cd;
     private FrmConvertor frmConvertor;
 
-    // Arrays de divisas
+    // Arrays de monedas
     private String[] divisas = {"seleccionar", "PEN - Sol peruano", "USD - Dólar estadounidense", "EUR - Euro", "GPB - Libra Esterlina", "JPY - Yen Japonés"};
 
     public ControllerDivisas(ConversorDivisas cd, FrmConvertor frmConvertor) {

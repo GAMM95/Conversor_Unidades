@@ -27,43 +27,26 @@ public class ConversorDivisas extends Unidad {
 
         }
         switch (unidadCambio) {
-            case "PEN - Sol peruano" -> {
-                return dato;
-            }
-            case "USD - Dólar estadounidense" -> {
-                return dato * TASA_DOLAR;
-            }
-            case "EUR - Euro" -> {
-                return dato * TASA_EURO;
-            }
-            case "GPB - Libra Esterlina" -> {
-                return dato * TASA_LIBRAS;
-            }
-            case "JPY - Yen Japonés" -> {
-                return dato * TASA_YEN;
-            }
+            case "PEN - Sol peruano" -> {return dato;}
+            case "USD - Dólar estadounidense" -> {return dato * TASA_DOLAR;}
+            case "EUR - Euro" -> {return dato * TASA_EURO; }
+            case "GPB - Libra Esterlina" -> {return dato * TASA_LIBRAS;}
+            case "JPY - Yen Japonés" -> {return dato * TASA_YEN;}
             default -> throw new IllegalArgumentException("Moneda de cambio no válida");
         }
     }
 
     @Override
     public String codigoISO(String unidad) {
-        switch (unidad) {
-            case "PEN - Sol peruano":
-                return "PEN";
-            case "USD - Dólar estadounidense":
-                return "USD";
-            case "EUR - Euro":
-                return "EUR";
-            case "COP - Peso colombiano":
-                return "COP";
-            case "JPY - Yen Japonés":
-                return "JPY";
-            case "GPB - Libra Esterlina":
-                return "GBP";
-            default:
-                return null;
-        }
+        return switch (unidad) {
+            case "PEN - Sol peruano" -> "PEN";
+            case "USD - Dólar estadounidense" -> "USD";
+            case "EUR - Euro" -> "EUR";
+            case "COP - Peso colombiano" -> "COP";
+            case "JPY - Yen Japonés" -> "JPY";
+            case "GPB - Libra Esterlina" -> "GBP";
+            default -> null;
+        };
     }
 
 }
