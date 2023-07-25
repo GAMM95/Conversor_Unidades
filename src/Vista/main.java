@@ -9,7 +9,7 @@ public class Main {
         Runnable mRun = () -> {
             
             // JFrame que funge como splash
-            SplashScreen mSplash = new SplashScreen();
+            var mSplash = new SplashScreen();
             mSplash.setVisible(true);
             
             try {
