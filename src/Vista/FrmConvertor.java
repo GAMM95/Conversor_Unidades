@@ -236,7 +236,7 @@ public class FrmConvertor extends javax.swing.JFrame {
         jLabel16.setText("Resultado");
         jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        txtResultado.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtResultado.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         txtResultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout panelShadow4Layout = new javax.swing.GroupLayout(panelShadow4);
@@ -1522,10 +1522,8 @@ public class FrmConvertor extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmConvertor().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FrmConvertor().setVisible(true);
         });
     }
 

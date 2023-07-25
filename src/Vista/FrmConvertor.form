@@ -424,7 +424,7 @@
                         <Component class="javax.swing.JLabel" name="txtResultado">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Dialog" size="16" style="0"/>
+                              <Font name="Dialog" size="16" style="1"/>
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                           </Properties>

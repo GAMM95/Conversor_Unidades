@@ -3,19 +3,24 @@ package Controlador;
 import Clases.Conversor;
 import Clases.ConversorPeso;
 import Vista.FrmConvertor;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ComboBoxModel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
 
-public class ControllerPeso implements ActionListener {
+public class ControllerPeso implements ActionListener, KeyListener, MouseListener {
 
     // Instancias de las clases
     private ConversorPeso cp;
     private FrmConvertor frmConvertor;
 
     // Arrays de pesos
-    private String[] pesos = {"seleccionar", "g - Gramo", "kt - Quilate", "kg - Kilogramo", "Tn - Tonelada", "oz - Onza", "lb - Libra"};
+    private final String[] pesos = {"seleccionar", "g - Gramo", "kt - Quilate", "kg - Kilogramo", "Tn - Tonelada", "oz - Onza", "lb - Libra"};
 
     public ControllerPeso(ConversorPeso cp, FrmConvertor frmConvertor) {
         this.cp = cp;
@@ -27,42 +32,67 @@ public class ControllerPeso implements ActionListener {
 
 //    Metodo para implementar las interfaces
     private void interfaces() {
+        // Eventos ActionListener
         frmConvertor.cboPesoBase.addActionListener(this);
         frmConvertor.cboPesoCambio.addActionListener(this);
         frmConvertor.btnConvertirPeso.addActionListener(this);
         frmConvertor.btnLimpiarPeso.addActionListener(this);
+        // Eventos KeyListener
+        frmConvertor.txtPesoBase.addKeyListener(this);
+        // Eventos MouseListener
+        frmConvertor.cboPesoBase.addMouseListener(this);
+        frmConvertor.cboPesoCambio.addMouseListener(this);
     }
 
     //  Metodo para llenar comboBox 
     private void cargarPesos() {
-        for (int i = 0; i < pesos.length; i++) {
-            frmConvertor.cboPesoBase.addItem(pesos[i]);
-            frmConvertor.cboPesoCambio.addItem(pesos[i]);
+        for (String peso : pesos) {
+            frmConvertor.cboPesoBase.addItem(peso);
+            frmConvertor.cboPesoCambio.addItem(peso);
         }
         frmConvertor.cboPesoBase.setModel(new DefaultComboBoxModel(pesos));
         frmConvertor.cboPesoCambio.setModel(new DefaultComboBoxModel(pesos));
     }
 
+    //   Metodo para validar campos vacios
+    private boolean validarCamposVacios() {
+        boolean action = true;
+        if (frmConvertor.cboPesoBase.getSelectedItem().toString().equals("seleccionar")) {
+            frmConvertor.txtResultadoPeso.setText("Seleccione una unidad de masa base");
+            frmConvertor.txtResultadoPeso.setForeground(Color.decode("#E94560"));
+            frmConvertor.txtResultadoPeso.setFont(new Font("Dialog", Font.BOLD, 16));
+            action = false;
+        } else if (frmConvertor.txtPesoBase.getText().trim().equals("")) {
+            frmConvertor.txtResultadoPeso.setText("Ingrese valor a convertir");
+            frmConvertor.txtResultadoPeso.setForeground(Color.decode("#E94560"));
+            frmConvertor.txtResultadoPeso.setFont(new Font("Dialog", Font.BOLD, 16));
+            frmConvertor.txtPesoBase.requestFocus();
+            action = false;
+        } else if (frmConvertor.cboPesoCambio.getSelectedItem().toString().equals("seleccionar")) {
+            frmConvertor.txtResultadoPeso.setText("Seleccione una unidad de masa a convertir");
+            frmConvertor.txtResultadoPeso.setForeground(Color.decode("#E94560"));
+            frmConvertor.txtResultadoPeso.setFont(new Font("Dialog", Font.BOLD, 16));
+            action = false;
+        }
+        return action;
+    }
+
     // Metodo para realizar la conversion del peso
     private void convertirPeso() {
         try {
-            if (frmConvertor.txtPesoBase.getText().isEmpty()) {
-                frmConvertor.txtResultadoPeso.setText("Ingrese valor a convertir");
-            } else if (frmConvertor.cboPesoCambio.equals("seleccionar")) {
-                frmConvertor.txtResultadoPeso.setText("Seleccione una moneda de cambio");
-            } else {
-                double peso = Double.parseDouble(frmConvertor.txtPesoBase.getText());
-                String pesoBase = frmConvertor.cboPesoBase.getSelectedItem().toString();
-                String pesoCambio = frmConvertor.cboPesoCambio.getSelectedItem().toString();
-                Conversor cd = new ConversorPeso(peso, pesoBase, pesoCambio);
-                double resultado = cd.convertir(peso, pesoBase, pesoCambio);
-                frmConvertor.txtPesoCambio.setText(String.valueOf(String.format("%.6f", resultado)));
+            double peso = Double.parseDouble(frmConvertor.txtPesoBase.getText());
+            String pesoBase = frmConvertor.cboPesoBase.getSelectedItem().toString();
+            String pesoCambio = frmConvertor.cboPesoCambio.getSelectedItem().toString();
+            Conversor cd = new ConversorPeso(peso, pesoBase, pesoCambio);
+            double resultado = cd.convertir(peso, pesoBase, pesoCambio);
+            frmConvertor.txtPesoCambio.setText(String.valueOf(String.format("%.6f", resultado)));
 
-                // Mostrar resultado con codigos ISO de cada unidad de peso
-                String peBase = cd.codigoISO(frmConvertor.cboPesoBase.getSelectedItem().toString());
-                String peCambio = cd.codigoISO(frmConvertor.cboPesoCambio.getSelectedItem().toString());
-                frmConvertor.txtResultadoPeso.setText(peso + " " + peBase + " = " + String.format("%.4f", resultado) + " " + peCambio);
-            }
+            // Mostrar resultado con codigos ISO de cada unidad de peso
+            String peBase = cd.codigoISO(frmConvertor.cboPesoBase.getSelectedItem().toString());
+            String peCambio = cd.codigoISO(frmConvertor.cboPesoCambio.getSelectedItem().toString());
+            frmConvertor.txtResultadoPeso.setText(peso + " " + peBase + " = " + String.format("%.4f", resultado) + " " + peCambio);
+            frmConvertor.txtResultadoPeso.setForeground(Color.decode("#023e8a"));
+            frmConvertor.txtResultadoPeso.setFont(new Font("Dialog", Font.BOLD, 16));
         } catch (NumberFormatException e) {
             // Manejar la excepción si no se puede convertir el valor a double
             System.out.println("Error en el formato del valor ingresado.");
@@ -95,6 +125,7 @@ public class ControllerPeso implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Evento para el comboBox de unidad Base
         if (e.getSource().equals(frmConvertor.cboPesoBase)) {
             if (!frmConvertor.cboPesoBase.getSelectedItem().equals("seleccionar")) {
                 habilitar();
@@ -104,15 +135,68 @@ public class ControllerPeso implements ActionListener {
                 inhabilitar();
             }
         }
-        if (e.getSource().equals(frmConvertor.btnConvertirPeso)) {
-            if (!frmConvertor.cboPesoCambio.getSelectedItem().toString().equals("seleccionar")) {
+
+        // Evento para el comboBox de unidad cambio
+        if (e.getSource().equals(frmConvertor.cboPesoCambio)) {
+            if (frmConvertor.cboPesoCambio.getSelectedItem().equals("seleccionar")) {
+                frmConvertor.txtPesoCambio.setText("");
+            } else {
                 convertirPeso();
             }
         }
+        
+        // Evento para el boton Convertir
+        if (e.getSource().equals(frmConvertor.btnConvertirPeso)) {
+            boolean validarVacios = validarCamposVacios(); // boolean: TRUE
+            if (validarVacios == false) {
+                validarCamposVacios();
+            } else {
+                convertirPeso();
+            }
+        }
+
+        // Evento para el boton limpiar
         if (e.getSource().equals(frmConvertor.btnLimpiarPeso)) {
             limpiarInputs();
         }
-
     }
 
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getSource().equals(frmConvertor.txtPesoBase)) {
+            frmConvertor.txtResultadoPeso.setText("");
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource().equals(frmConvertor.cboPesoBase) || e.getSource().equals(frmConvertor.cboPesoCambio)) {
+            frmConvertor.txtResultadoPeso.setText("");
+        }
+    }
+
+    // Eventos no utilizados
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
 }
