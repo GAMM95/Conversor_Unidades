@@ -27,12 +27,13 @@
 
 <!-- Desarrollado con -->
 ### 💻 Desarrollado con
-Este aplicativo de escritorio fue desarrollado usando JavaSE 20 y el IDE Apache Netbeans 18
+>Este aplicativo de escritorio fue desarrollado usando JavaSE 20 y el IDE Apache Netbeans 18
 <img src="https://skillicons.dev/icons?i=java,netbeans"></img>
 --
 
-## 🧿 Visualizaciones
+## 🧿 Diseño
 <img  src="images/img 1.png" style="width: 80%" aling="center">
+--
 
 ## 🌐 Descargar Demo
 > Puedes descargar el ejecutable.exe [aqui](<a src="jar/gamm95.conversor_unidades v1.0.jar"/>).
