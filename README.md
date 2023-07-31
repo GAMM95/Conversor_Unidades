@@ -15,7 +15,7 @@
 <img src="https://skillicons.dev/icons?i=java,netbeans"></img>
 
 ## 🧿 Diseño
-<img  src="src/Imagenes/img 1.png" style="width: 50%" aling="center">
+<img  src="src/Imagenes/img 1.png" style="width: 40%" aling="center">
 
 ## 🌐 Descargar Demo
-> Puedes descargar el ejecutable.exe [aqui](<a src="jar/gamm95.conversor_unidades v1.0.jar"/>).
+> Puedes descargar el ejecutable.exe [aqui](jar/gamm95.conversor_unidades v1.0.jar"/>).
