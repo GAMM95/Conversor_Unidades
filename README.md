@@ -26,7 +26,7 @@
 <!-- Desarrollado con -->
 ### 💻 Desarrollado con
 >Este aplicativo de escritorio fue desarrollado usando JavaSE 20 y el IDE Apache Netbeans 18
-<br>
+>
 <img src="https://skillicons.dev/icons?i=java,netbeans"></img>
 
 ## 🧿 Diseño
