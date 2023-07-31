@@ -1,23 +1,5 @@
+# Conversor de Unidades
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-
-=======
 <!-- Acerca del proyecto -->
 ## 📘 Acerca del Proyecto
 >Este es un proyecto desarrollado en lenguaje Java programa de Oracle Next Education. Este programa consiste en crear un conversor de unidades como temperatura, peso, longitud, superficie y volumen. Su funcionalidad es simple y efectiva: los usuarios ingresan un valor numérico y seleccionan la unidad base correspondiente. Luego, al elegir la unidad de cambio, el programa realiza automáticamente el cálculo y muestra el nuevo valor convertido.
@@ -33,8 +15,7 @@
 <img src="https://skillicons.dev/icons?i=java,netbeans"></img>
 
 ## 🧿 Diseño
-<img  src="images/img 1.png" style="width: 50%" aling="center">
+<img  src="src/Imagenes/img 1.png" style="width: 50%" aling="center">
 
 ## 🌐 Descargar Demo
 > Puedes descargar el ejecutable.exe [aqui](<a src="jar/gamm95.conversor_unidades v1.0.jar"/>).
->>>>>>> 2497ab11baae9a6ba241a51fea070140f266cb2e
