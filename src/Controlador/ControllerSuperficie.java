@@ -2,6 +2,7 @@ package Controlador;
 
 import Clases.Conversor;
 import Clases.ConversorSuperficie;
+import Clases.ValidarNumerosException;
 import Vista.FrmConvertor;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,8 +17,8 @@ import javax.swing.DefaultComboBoxModel;
 public class ControllerSuperficie implements ActionListener, KeyListener, MouseListener {
 
     // Instancias de las clases
-    private ConversorSuperficie ca;
-    private FrmConvertor frmConvertor;
+    private final ConversorSuperficie ca;
+    private final FrmConvertor frmConvertor;
 
     // Arrays de uniaddes de superficie
     private final String[] areas = {"seleccionar", "m² - Metro cuadrado", "mm² - Milímetro cuadrado", "cm² - Centímetro cuadrado", "dm² - Decímetro cuadrado", "ha - Hectárea", "km² - Kilómetro cuadrado", "in²- Pulgada cuadrada", "ft² - Pie cuadrado", "yd² - Yarda cuadrada", "pc - Perca", "ac - Acre"};
@@ -77,6 +78,17 @@ public class ControllerSuperficie implements ActionListener, KeyListener, MouseL
         return action;
     }
 
+    // formato mensaje de error
+    private void mensajeError() {
+        frmConvertor.txtResultadoArea.setForeground(Color.decode("#E94560"));
+        frmConvertor.txtResultadoArea.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
+    private void mensajeCorrecto() {
+        frmConvertor.txtResultadoArea.setForeground(Color.decode("#023e8a"));
+        frmConvertor.txtResultadoArea.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
     // Metodo para realizar la conversion de unidades de superficie
     private void convertirArea() {
         try {
@@ -91,14 +103,15 @@ public class ControllerSuperficie implements ActionListener, KeyListener, MouseL
             String arBase = cd.codigoISO(frmConvertor.cboAreaBase.getSelectedItem().toString());
             String arCambio = cd.codigoISO(frmConvertor.cboAreaCambio.getSelectedItem().toString());
             frmConvertor.txtResultadoArea.setText(area + " " + arBase + " = " + String.format("%.4f", resultado) + " " + arCambio);
-            frmConvertor.txtResultadoArea.setForeground(Color.decode("#023e8a"));
-            frmConvertor.txtResultadoArea.setFont(new Font("Dialog", Font.BOLD, 16));
+            mensajeCorrecto();
         } catch (NumberFormatException e) {
             // Manejar la excepción si no se puede convertir el valor a double
-            System.out.println("Error en el formato del valor ingresado.");
+            frmConvertor.txtResultadoArea.setText("Error en el formato del valor ingresado");
+            mensajeError();
         } catch (IllegalArgumentException e) {
             // Manejar la excepción si se ingresó una unidad no válida
-            System.out.println("Error");
+            frmConvertor.txtResultadoArea.setText("Error en el formato del valor ingresado");
+            mensajeError();
         }
     }
 
@@ -140,7 +153,7 @@ public class ControllerSuperficie implements ActionListener, KeyListener, MouseL
         if (e.getSource().equals(frmConvertor.cboAreaCambio)) {
             if (frmConvertor.cboAreaCambio.getSelectedItem().equals("seleccionar")) {
                 frmConvertor.txtAreaCambio.setText("");
-            }else{
+            } else {
                 convertirArea();
             }
         }
@@ -194,6 +207,9 @@ public class ControllerSuperficie implements ActionListener, KeyListener, MouseL
 
     @Override
     public void keyTyped(KeyEvent e) {
+        if (e.getSource().equals(frmConvertor.txtAreaBase)) {
+            ValidarNumerosException.soloDigitos(e);
+        }
     }
 
     @Override

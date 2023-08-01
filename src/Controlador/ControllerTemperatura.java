@@ -2,6 +2,7 @@ package Controlador;
 
 import Clases.Conversor;
 import Clases.ConversorTemperatura;
+import Clases.ValidarNumerosException;
 import Vista.FrmConvertor;
 import java.awt.Color;
 import java.awt.Font;
@@ -77,6 +78,17 @@ public class ControllerTemperatura implements ActionListener, KeyListener, Mouse
         return action;
     }
 
+    // formato mensaje de error
+    private void mensajeError() {
+        frmConvertor.txtResultadoTemperatura.setForeground(Color.decode("#E94560"));
+        frmConvertor.txtResultadoTemperatura.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
+    private void mensajeCorrecto() {
+        frmConvertor.txtResultadoTemperatura.setForeground(Color.decode("#023e8a"));
+        frmConvertor.txtResultadoTemperatura.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
     // Metodo para realizar la conversion de la temperatura
     private void convertirTemperatura() {
         try {
@@ -92,14 +104,12 @@ public class ControllerTemperatura implements ActionListener, KeyListener, Mouse
             String temCambio = cd.codigoISO(frmConvertor.cboTemperaturaCambio.getSelectedItem().toString());
 
             frmConvertor.txtResultadoTemperatura.setText(temperatura + " " + temBase + " = " + String.format("%.2f", resultado) + " " + temCambio);
-            frmConvertor.txtResultadoTemperatura.setForeground(Color.decode("#023e8a"));
-            frmConvertor.txtResultadoTemperatura.setFont(new Font("Dialog", Font.BOLD, 16));
+            mensajeCorrecto();
+
         } catch (NumberFormatException e) {
             // Manejar la excepción si no se puede convertir el valor a double
-            System.out.println("Error en el formato del valor ingresado.");
-        } catch (IllegalArgumentException e) {
-            // Manejar la excepción si se ingresó una unidad no válida
-            System.out.println("Error");
+            frmConvertor.txtResultadoTemperatura.setText("Error en el formato del valor ingresado");
+            mensajeError();
         }
     }
 
@@ -195,6 +205,9 @@ public class ControllerTemperatura implements ActionListener, KeyListener, Mouse
 
     @Override
     public void keyTyped(KeyEvent e) {
+        if (e.getSource().equals(frmConvertor.txtTemperaturaBase)) {
+            ValidarNumerosException.soloDigitos(e);
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package Controlador;
 
 import Clases.Conversor;
 import Clases.ConversorVolumen;
+import Clases.ValidarNumerosException;
 import Vista.FrmConvertor;
 import java.awt.Color;
 import java.awt.Font;
@@ -77,6 +78,17 @@ public class ControllerVolumen implements ActionListener, KeyListener, MouseList
         return action;
     }
 
+    // formato mensaje de error
+    private void mensajeError() {
+        frmConvertor.txtResultadoVolumen.setForeground(Color.decode("#E94560"));
+        frmConvertor.txtResultadoVolumen.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
+    private void mensajeCorrecto() {
+        frmConvertor.txtResultadoVolumen.setForeground(Color.decode("#023e8a"));
+        frmConvertor.txtResultadoVolumen.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
     // Metodo para realizar la conversion del volumen
     private void convertirVolumen() {
         try {
@@ -92,14 +104,15 @@ public class ControllerVolumen implements ActionListener, KeyListener, MouseList
             String volCambio = cd.codigoISO(frmConvertor.cboVolumenCambio.getSelectedItem().toString());
 
             frmConvertor.txtResultadoVolumen.setText(volumen + " " + volBase + " = " + String.format("%.4f", resultado) + " " + volCambio);
-            frmConvertor.txtResultadoVolumen.setForeground(Color.decode("#023e8a"));
-            frmConvertor.txtResultadoVolumen.setFont(new Font("Dialog", Font.BOLD, 16));
+            mensajeCorrecto();
         } catch (NumberFormatException e) {
             // Manejar la excepción si no se puede convertir el valor a double
-            System.out.println("Error en el formato del valor ingresado.");
+            frmConvertor.txtResultadoVolumen.setText("Error en el formato del valor ingresado");
+            mensajeError();
         } catch (IllegalArgumentException e) {
             // Manejar la excepción si se ingresó una unidad no válida
-            System.out.println("Error");
+            frmConvertor.txtResultadoVolumen.setText("Error en el formato del valor ingresado");
+            mensajeError();
         }
     }
 
@@ -180,6 +193,9 @@ public class ControllerVolumen implements ActionListener, KeyListener, MouseList
     // Eventos no utilizados
     @Override
     public void keyTyped(KeyEvent e) {
+                if (e.getSource().equals(frmConvertor.txtVolumenBase)) {
+            ValidarNumerosException.soloDigitos(e);
+        }
     }
 
     @Override

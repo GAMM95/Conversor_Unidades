@@ -11,7 +11,7 @@ public class ConversorTemperatura extends Unidad {
 
     @Override
     public double convertir(double valor, String unidadInicial, String unidadCambio) {
-        double dato = 0;
+        double dato = 0;    
         switch (unidadInicial) {
             case "°C - Celsius" -> dato = valor;
             case "°F - Fahrenheit" -> dato = (valor - 32) * 5 / 9;

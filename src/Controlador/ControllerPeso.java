@@ -2,6 +2,7 @@ package Controlador;
 
 import Clases.Conversor;
 import Clases.ConversorPeso;
+import Clases.ValidarNumerosException;
 import Vista.FrmConvertor;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,8 +17,8 @@ import javax.swing.DefaultComboBoxModel;
 public class ControllerPeso implements ActionListener, KeyListener, MouseListener {
 
     // Instancias de las clases
-    private ConversorPeso cp;
-    private FrmConvertor frmConvertor;
+    private final ConversorPeso cp;
+    private final FrmConvertor frmConvertor;
 
     // Arrays de pesos
     private final String[] pesos = {"seleccionar", "g - Gramo", "kt - Quilate", "kg - Kilogramo", "Tn - Tonelada", "oz - Onza", "lb - Libra"};
@@ -77,6 +78,17 @@ public class ControllerPeso implements ActionListener, KeyListener, MouseListene
         return action;
     }
 
+    // formato mensaje de error
+    private void mensajeError() {
+        frmConvertor.txtResultadoPeso.setForeground(Color.decode("#E94560"));
+        frmConvertor.txtResultadoPeso.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
+    private void mensajeCorrecto() {
+        frmConvertor.txtResultadoPeso.setForeground(Color.decode("#023e8a"));
+        frmConvertor.txtResultadoPeso.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
     // Metodo para realizar la conversion del peso
     private void convertirPeso() {
         try {
@@ -91,14 +103,15 @@ public class ControllerPeso implements ActionListener, KeyListener, MouseListene
             String peBase = cd.codigoISO(frmConvertor.cboPesoBase.getSelectedItem().toString());
             String peCambio = cd.codigoISO(frmConvertor.cboPesoCambio.getSelectedItem().toString());
             frmConvertor.txtResultadoPeso.setText(peso + " " + peBase + " = " + String.format("%.4f", resultado) + " " + peCambio);
-            frmConvertor.txtResultadoPeso.setForeground(Color.decode("#023e8a"));
-            frmConvertor.txtResultadoPeso.setFont(new Font("Dialog", Font.BOLD, 16));
+            mensajeCorrecto();
         } catch (NumberFormatException e) {
             // Manejar la excepción si no se puede convertir el valor a double
-            System.out.println("Error en el formato del valor ingresado.");
+            frmConvertor.txtResultadoPeso.setText("Error en el formato del valor ingresado");
+            mensajeError();
         } catch (IllegalArgumentException e) {
             // Manejar la excepción si se ingresó una unidad no válida
-            System.out.println("Error");
+            frmConvertor.txtResultadoPeso.setText("Error en el formato del valor ingresado");
+            mensajeError();
         }
     }
 
@@ -144,7 +157,7 @@ public class ControllerPeso implements ActionListener, KeyListener, MouseListene
                 convertirPeso();
             }
         }
-        
+
         // Evento para el boton Convertir
         if (e.getSource().equals(frmConvertor.btnConvertirPeso)) {
             boolean validarVacios = validarCamposVacios(); // boolean: TRUE
@@ -194,6 +207,9 @@ public class ControllerPeso implements ActionListener, KeyListener, MouseListene
 
     @Override
     public void keyTyped(KeyEvent e) {
+        if (e.getSource().equals(frmConvertor.txtPesoBase)) {
+            ValidarNumerosException.soloDigitos(e);
+        }
     }
 
     @Override

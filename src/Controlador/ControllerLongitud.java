@@ -2,6 +2,7 @@ package Controlador;
 
 import Clases.Conversor;
 import Clases.ConversorLongitud;
+import Clases.ValidarNumerosException;
 import Vista.FrmConvertor;
 import java.awt.Color;
 import java.awt.Font;
@@ -78,6 +79,17 @@ public class ControllerLongitud implements ActionListener, KeyListener, MouseLis
         return action;
     }
 
+    // formato mensaje de error
+    private void mensajeError() {
+        frmConvertor.txtResultadoLongitud.setForeground(Color.decode("#E94560"));
+        frmConvertor.txtResultadoLongitud.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
+    private void mensajeCorrecto() {
+        frmConvertor.txtResultadoLongitud.setForeground(Color.decode("#023e8a"));
+        frmConvertor.txtResultadoLongitud.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
     // Metodo para realizar la conversion de longitud
     private void convertirLongitud() {
         try {
@@ -92,14 +104,14 @@ public class ControllerLongitud implements ActionListener, KeyListener, MouseLis
             String lonBase = cd.codigoISO(frmConvertor.cboLongitudBase.getSelectedItem().toString());
             String lonCambio = cd.codigoISO(frmConvertor.cboLongitudCambio.getSelectedItem().toString());
             frmConvertor.txtResultadoLongitud.setText(longitud + " " + lonBase + " = " + String.format("%.4f", resultado) + " " + lonCambio);
-            frmConvertor.txtResultadoLongitud.setForeground(Color.decode("#023e8a"));
-            frmConvertor.txtResultadoLongitud.setFont(new Font("Dialog", Font.BOLD, 16));
+            mensajeCorrecto();
         } catch (NumberFormatException e) {
             // Manejar la excepción si no se puede convertir el valor a double
-            System.out.println("Error en el formato del valor ingresado.");
+            frmConvertor.txtResultadoLongitud.setText("Error en el formato del valor ingresado");
+            mensajeError();
         } catch (IllegalArgumentException e) {
-            // Manejar la excepción si se ingresó una unidad no válida
-            System.out.println("Error");
+            frmConvertor.txtResultadoLongitud.setText("Error en el formato del valor ingresado");
+            mensajeError();
         }
     }
     // Metodo para deshabilitar inputs
@@ -195,6 +207,9 @@ public class ControllerLongitud implements ActionListener, KeyListener, MouseLis
 
     @Override
     public void keyTyped(KeyEvent e) {
+        if (e.getSource().equals(frmConvertor.txtLongitudBase)) {
+            ValidarNumerosException.soloDigitos(e);
+        }
     }
 
     @Override

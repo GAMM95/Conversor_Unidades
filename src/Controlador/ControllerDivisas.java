@@ -1,6 +1,7 @@
 package Controlador;
 
 import Clases.ConversorDivisas;
+import Clases.ValidarNumerosException;
 import Vista.FrmConvertor;
 import java.awt.Color;
 import java.awt.Font;
@@ -11,8 +12,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import org.json.JSONObject;
 
@@ -80,6 +84,17 @@ public class ControllerDivisas implements ActionListener, KeyListener, MouseList
         return action;
     }
 
+    // formato mensaje de error
+    private void mensajeError() {
+        frmConvertor.txtResultado.setForeground(Color.decode("#E94560"));
+        frmConvertor.txtResultado.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
+    private void mensajeCorrecto() {
+        frmConvertor.txtResultado.setForeground(Color.decode("#023e8a"));
+        frmConvertor.txtResultado.setFont(new Font("Dialog", Font.BOLD, 16));
+    }
+
     // Metodo para realizar la conversion de la divisa
     private void convertirDivisa() {
         try {
@@ -103,10 +118,14 @@ public class ControllerDivisas implements ActionListener, KeyListener, MouseList
             double resultado = moneda * tasaDestino / tasaOrigen;
             frmConvertor.txtDivisaCambio.setText(String.valueOf(String.format("%.4f", resultado)));
             frmConvertor.txtResultado.setText(moneda + " " + monedaBase + " = " + String.format("%.2f", resultado) + " " + monedaCambio);
-            frmConvertor.txtResultado.setForeground(Color.decode("#023e8a"));
-            frmConvertor.txtResultado.setFont(new Font("Dialog", Font.BOLD, 16));
-        } catch (IOException e) {
-            e.printStackTrace();
+            mensajeCorrecto();
+        } catch (NumberFormatException | MalformedURLException e) {
+            // Manejar la excepción si no se puede convertir el valor a double
+            frmConvertor.txtResultado.setText("Error en el formato del valor ingresado");
+            mensajeError();
+        } catch (IOException ex) {
+            frmConvertor.txtResultado.setText("Error en el formato del valor ingresado");
+            mensajeError();
         }
     }
 
@@ -186,6 +205,9 @@ public class ControllerDivisas implements ActionListener, KeyListener, MouseList
     // Eventos no utilizados
     @Override
     public void keyTyped(KeyEvent e) {
+        if (e.getSource().equals(frmConvertor.txtDivisaBase)) {
+            ValidarNumerosException.soloDigitos(e);
+        }
     }
 
     @Override
