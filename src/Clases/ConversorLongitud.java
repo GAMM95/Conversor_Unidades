@@ -12,6 +12,7 @@ public class ConversorLongitud extends Unidad {
     @Override
     public double convertir(double valor, String unidadInicial, String unidadCambio) {
         double dato = 0;
+        
         switch (unidadInicial) {
             case "m - Metro" -> dato = valor;
             case "mm - Milímetro" -> dato = valor / 1000;
